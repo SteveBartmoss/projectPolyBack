@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class UserService {
@@ -13,6 +14,28 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>
   ){}
+
+  async login(loginUserDto: LoginUserDto){
+
+
+    const {password, email} = loginUserDto
+
+    const user = await this.userRepository.findOne({
+      where: {email},
+      select: {email: true, password: true}
+    })
+
+    if(!user){
+      throw new UnauthorizedException('Credentials are not valid')
+    }
+
+    if(bcrypt.compareSync(password, user.password)){
+      throw new UnauthorizedException('Credentials are not valid')
+    }
+
+    return user
+    
+  }
 
   async create(createUserDto: CreateUserDto) {
     try{
