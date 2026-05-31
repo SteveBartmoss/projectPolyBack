@@ -1,5 +1,5 @@
 services:
-  db:
+  postgres:
     image: postgres:14.3
     restart: always
     ports:
@@ -10,3 +10,17 @@ services:
     container_name: judyDB
     volumes:
       - ./postgres:/var/lib/postgresql/data
+    env_file:
+      - .env
+  mongo:
+    image: mongo:5
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_MONGO_NAME}
+    container_name: tabataDB
+    volumes:
+      - ./mongo:/data/db
+    env_file:
+      - .env
