@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { MongooseModule } from '@nestjs/mongoose';
       synchronize: true,
     }),
     MongooseModule.forRoot(`mongodb://localhost:27017/${process.env.DB_MONGO_NAME}`),
-    UserModule
+    UserModule,
+    PostModule
   ],
   controllers: [AppController],
   providers: [AppService],
