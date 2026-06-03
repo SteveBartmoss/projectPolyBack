@@ -63,8 +63,16 @@ export class UserService {
     }
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    try{
+
+      const userList = await this.userRepository.find()
+
+      return userList
+      
+    } catch(error){
+      console.log(error)
+    }
   }
 
   findOne(id: number) {
