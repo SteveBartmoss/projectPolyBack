@@ -4,6 +4,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { Model } from 'mongoose';
 import { Post } from './entities/post.entity';
 import { InjectModel } from '@nestjs/mongoose';
+import { ErrorHelper } from 'src/utils/helpers/errorHelper';
 
 @Injectable()
 export class PostService {
@@ -28,8 +29,17 @@ export class PostService {
 
   }
 
-  findAll() {
-    return `This action returns all post`;
+  async findAll() {
+
+    try{
+      const postList = await this.postModel.find()
+
+      return postList
+      
+    } catch (error) {
+      ErrorHelper.handleError(error)
+    }
+    
   }
 
   findOne(id: number) {
