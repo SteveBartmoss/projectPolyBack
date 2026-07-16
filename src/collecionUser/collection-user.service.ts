@@ -11,15 +11,19 @@ export class CollectionUserService {
 
     constructor(
         @InjectModel(CollectionUser.name)
-        private readonly postModel: Model<CollectionUser>
+        private readonly collectionUser: Model<CollectionUser>
     ){}
 
     async create(CreateCollectionDto: CreateCollectionUserDto){
 
         try{
 
+            const collection = await this.collectionUser.create(CreateCollectionDto)
+
+            return collection
+
         } catch(error) {
-            
+            console.log(error)
         }
 
     }
