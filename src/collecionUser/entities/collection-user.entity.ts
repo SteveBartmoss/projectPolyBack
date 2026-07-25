@@ -28,4 +28,4 @@ export class CollectionUser extends Document {
 
 }
 
-export const CollectionUserSchema = SchemaFactory.createForClass(Collection)
+export const CollectionUserSchema = SchemaFactory.createForClass(CollectionUser)
