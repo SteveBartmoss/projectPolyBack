@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostModule } from './post/post.module';
+import { CollectionUserModule } from './collecionUser/collection-user.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { PostModule } from './post/post.module';
     }),
     MongooseModule.forRoot(`mongodb://localhost:27017/${process.env.DB_MONGO_NAME}`),
     UserModule,
-    PostModule
+    PostModule,
+    CollectionUserModule
   ],
   controllers: [AppController],
   providers: [AppService],
