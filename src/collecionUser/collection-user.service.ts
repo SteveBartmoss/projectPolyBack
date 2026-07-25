@@ -1,8 +1,8 @@
 import { Injectable, Post } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { CollectionUser } from "./entities/collecion-user.entity";
 import { Model } from "mongoose";
 import { CreateCollectionUserDto } from "./dto/create-collection-user.dt";
+import { CollectionUser } from "./entities/collection-user.entity";
 
 
 @Injectable()
