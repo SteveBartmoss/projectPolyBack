@@ -1,4 +1,4 @@
-import { Injectable, Post } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { CreateCollectionUserDto } from "./dto/create-collection-user.dt";
@@ -14,11 +14,11 @@ export class CollectionUserService {
         private readonly collectionUser: Model<CollectionUser>
     ){}
 
-    async create(CreateCollectionDto: CreateCollectionUserDto){
+    async create(createCollectionDto: CreateCollectionUserDto){
 
         try{
 
-            const collection = await this.collectionUser.create(CreateCollectionDto)
+            const collection = await this.collectionUser.create(createCollectionDto)
 
             return collection
 
