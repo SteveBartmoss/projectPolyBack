@@ -28,8 +28,18 @@ export class UserTimelineService {
 
   }
 
-  findAll() {
-    return `This action returns all userTimeline`;
+  async findAll() {
+    
+    try{
+
+      const timeline = await this.userTimelineModel.find()
+
+      return timeline
+
+    } catch (error){
+      console.log(error)
+    }
+
   }
 
   findOne(id: number) {
