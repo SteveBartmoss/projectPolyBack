@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PostModule } from './post/post.module';
 import { CollectionUserModule } from './collecionUser/collection-user.module';
 import { UserTimelineModule } from './user-timeline/user-timeline.module';
+import { ProfileUserModule } from './profileUser/profile-user.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { UserTimelineModule } from './user-timeline/user-timeline.module';
     UserModule,
     PostModule,
     CollectionUserModule,
-    UserTimelineModule
+    UserTimelineModule,
+    ProfileUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
