@@ -9,6 +9,7 @@ import { PostModule } from './post/post.module';
 import { CollectionUserModule } from './collecionUser/collection-user.module';
 import { UserTimelineModule } from './user-timeline/user-timeline.module';
 import { ProfileUserModule } from './profileUser/profile-user.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ProfileUserModule } from './profileUser/profile-user.module';
     CollectionUserModule,
     UserTimelineModule,
     ProfileUserModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
