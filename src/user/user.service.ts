@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,7 +24,11 @@ export class UserService {
 
     const user = await this.userRepository.findOne({
       where: {email},
-      select: {email: true, password: true}
+      select: {
+        id: true,
+        email: true, 
+        password: true
+      }
     })
 
     if(!user){
@@ -59,12 +63,20 @@ export class UserService {
       }
 
     }catch(error){
-      console.log(error)
+      this.handleExceptions(error)
     }
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    try{
+
+      const userList = await this.userRepository.find()
+
+      return userList
+
+    } catch(error){
+      this.handleExceptions(error)
+    }
   }
 
   findOne(id: number) {
@@ -83,4 +95,13 @@ export class UserService {
     const token = this.jwtService.sign(payload)
     return token
   }
+
+  private handleExceptions(error: any){
+    if(error.code === '23505'){
+      throw new BadRequestException(error.detail)
+    }
+    console.log(error)
+    throw new InternalServerErrorException('Unexpected error, check server logs')
+  }
+  
 }

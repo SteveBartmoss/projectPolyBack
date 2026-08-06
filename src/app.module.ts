@@ -4,10 +4,18 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { PostModule } from './post/post.module';
+import { CollectionUserModule } from './collecionUser/collection-user.module';
+import { UserTimelineModule } from './user-timeline/user-timeline.module';
+import { ProfileUserModule } from './profileUser/profile-user.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST!,
@@ -18,7 +26,13 @@ import { UserModule } from './user/user.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UserModule
+    MongooseModule.forRoot(`mongodb://localhost:27017/${process.env.DB_MONGO_NAME}`),
+    UserModule,
+    PostModule,
+    CollectionUserModule,
+    UserTimelineModule,
+    ProfileUserModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
