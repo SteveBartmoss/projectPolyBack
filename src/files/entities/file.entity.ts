@@ -15,6 +15,11 @@ export class File extends Document {
     @Prop({
         required: true
     })
+    name: string;
+
+    @Prop({
+        required: true
+    })
     owner: string;
 
     @Prop({
