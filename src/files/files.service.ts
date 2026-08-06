@@ -39,13 +39,22 @@ export class FilesService {
 
       await writeFile(filePath, file.buffer)
 
-      //todo: agregar el nuevo nombre
-      const fileDocument = await this.fileModel.create(createFileDto)
+      const fileDocument = await this.fileModel.create({
+        ...createFileDto,
+        filename,
+        originalName: file.originalname,
+        mimeType: file.mimetype,
+        size: file.size,
+        path: filePath,
+      });
 
-      return file
+      return fileDocument
 
     } catch(error){
-
+      console.error(error);
+      throw new InternalServerErrorException(
+        'Could not store file',
+      )
     }
 
   }
