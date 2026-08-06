@@ -20,9 +20,9 @@
 </p>
 
 
-# ProjectJudy
+# ProjectPoly
 
-Este es el backend para el proyecto de inventario y punto de venta para negocio pequenos o quiza escalables
+Este es el backend para el proyecto de una micro red social
 
 ## Levantar el proyecto
 
@@ -34,23 +34,20 @@ Este es el backend para el proyecto de inventario y punto de venta para negocio 
 npm install
 ```
 
-3. Levantar db con docker
+3. Configurar el .env (basta con crear un nuevo archivo a partir de .env.example)
+
+4. Levantar db con docker
 
 ```bash
 sudo docker compose up -d 
 o docker compose up -d #en caso de no ser super usuario
 ```
 
-4. Levantar el proyecto
+5. Levantar el proyecto
 
 ```bash
 npm run start:dev
 ```
-
-
-## Description
-
-Backend para un servicio de foro
 
 ## Project setup
 
@@ -69,17 +66,4 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
