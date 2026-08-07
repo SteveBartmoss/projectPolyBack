@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -39,14 +39,13 @@ export class FilesService {
 
       await writeFile(filePath, file.buffer)
 
-      const fileDocument = await this.fileModel.create({
-        ...createFileDto,
-        filename,
-        originalName: file.originalname,
-        mimeType: file.mimetype,
-        size: file.size,
-        path: filePath,
-      });
+      createFileDto.name = filename
+      createFileDto.originalName = file.originalname
+      createFileDto.mime = file.mimetype
+      createFileDto.size = file.size
+      createFileDto.path = file.path
+
+      const fileDocument = await this.fileModel.create(createFileDto);
 
       return fileDocument
 
