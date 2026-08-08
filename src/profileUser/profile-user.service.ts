@@ -3,6 +3,7 @@ import { ProfileUser } from "./entities/profile-user.entity";
 import { CreateProfileUserDto } from "./dto/create-profile-user.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { ErrorHelper } from "src/utils/helpers/errorHelper";
 
 
 @Injectable()
@@ -26,6 +27,21 @@ export class ProfileUserService {
             console.log(error)
         }
 
+    }
+
+    async findOne(id: string) {
+
+        try{
+
+            const profileUser = await this.profileModel.findOne({
+                userId: id
+            })
+
+            return profileUser
+
+        } catch(error) {
+            ErrorHelper.handleError(error)
+        }
     }
 
 }
