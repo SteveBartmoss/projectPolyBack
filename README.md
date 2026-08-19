@@ -84,7 +84,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-#Importante
+# Importante
 
 El proyecto esta pensado como codigo abierto, sin la intencion de generar ingresos para alguien en particular, 
 la intencion de este proyecto tambien es permitir que personas que no tengan muchos conocimientos, puedan 
