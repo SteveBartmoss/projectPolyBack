@@ -20,9 +20,9 @@
 </p>
 
 
-# ProjectJudy
+# ProjectPoly
 
-Este es el backend para el proyecto de inventario y punto de venta para negocio pequenos o quiza escalables
+Este es el backend para el proyecto de foro y una aplicacion similar a una red social que sea auto administrable y no dependa de una empresa, ademas de evitar los grandes muros de pago
 
 ## Levantar el proyecto
 
@@ -83,3 +83,11 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+#Importante
+
+El proyecto esta pensado como codigo abierto, sin la intencion de generar ingresos para alguien en particular, 
+la intencion de este proyecto tambien es permitir que personas que no tengan muchos conocimientos, puedan 
+practicar y aprender. 
+
+Para saber mas puedes leer el archivo ProyectPoly.md
