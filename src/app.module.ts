@@ -10,6 +10,7 @@ import { CollectionUserModule } from './collecionUser/collection-user.module';
 import { UserTimelineModule } from './user-timeline/user-timeline.module';
 import { ProfileUserModule } from './profileUser/profile-user.module';
 import { FilesModule } from './files/files.module';
+import { BacklogGamesModule } from './backlog-games/backlog-games.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { FilesModule } from './files/files.module';
     UserTimelineModule,
     ProfileUserModule,
     FilesModule,
+    BacklogGamesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
