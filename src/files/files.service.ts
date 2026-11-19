@@ -58,8 +58,39 @@ export class FilesService {
     return `This action returns all files`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} file`;
+  async findOne(id: string) {
+
+    const fileDocument = await this.fileModel.findById(id);
+
+    if (!fileDocument) {
+      throw new NotFoundException('File not found');
+    }
+
+    const filePath = resolve(process.cwd(), fileDocument.path);
+
+    try {
+
+      await access(filePath);
+
+      const buffer = await readFile(filePath);
+
+      return {
+        buffer,
+        mime: fileDocument.mime,
+        originalName: fileDocument.originalName,
+        size: fileDocument.size,
+      };
+
+    } catch (error) {
+
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+        throw new NotFoundException('Physical file not found');
+      }
+
+      throw new InternalServerErrorException(
+        'Could not read file'
+      );
+    }
   }
 
   update(id: number, updateFileDto: UpdateFileDto) {
