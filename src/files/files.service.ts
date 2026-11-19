@@ -20,42 +20,38 @@ export class FilesService {
     file: Express.Multer.File,
     createFileDto: CreateFileDto
   ) {
+    try {
+      const storagePath = join(process.cwd(), 'storage', 'files');
 
-    try{
-
-      const storagePath = join(process.cwd(),'storage','files');
-
-      await mkdir(storagePath,{
+      await mkdir(storagePath, {
         recursive: true,
-      })
+      });
 
       const extension = file.originalname.includes('.')
-      ? `.${file.originalname.split('.').pop()}`
-      : ''
+        ? `.${file.originalname.split('.').pop()}`
+        : '';
 
-      const filename = `${randomUUID()}${extension}`
+      const filename = `${randomUUID()}${extension}`;
 
-      const filePath = join(storagePath, filename)
+      const filePath = join(storagePath, filename);
 
-      await writeFile(filePath, file.buffer)
+      await writeFile(filePath, file.buffer);
 
-      createFileDto.name = filename
-      createFileDto.originalName = file.originalname
-      createFileDto.mime = file.mimetype
-      createFileDto.size = file.size
-      createFileDto.path = file.path
+      createFileDto.name = filename;
+      createFileDto.originalName = file.originalname;
+      createFileDto.mime = file.mimetype;
+      createFileDto.size = file.size;
+      createFileDto.path = join('storage', 'files', filename);
 
-      const fileDocument = await this.fileModel.create(createFileDto);
+      return await this.fileModel.create(createFileDto);
 
-      return fileDocument
-
-    } catch(error){
+    } catch (error) {
       console.error(error);
+
       throw new InternalServerErrorException(
         'Could not store file',
-      )
+      );
     }
-
   }
 
   findAll() {
